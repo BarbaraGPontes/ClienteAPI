@@ -1,0 +1,265 @@
+﻿@model ClienteAPI.Models.Cliente
+
+<h1>Editar Cliente</h1>
+
+<form asp-action="Atualizar" method="post">
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input asp-for="Nome" required class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" required class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <div class="col">
+            <label asp-for="CPF" class="form-label"></label>
+            <input asp-for="CPF" required oninput="formatCPF(this)" maxlength="14" class="form-control" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="RG" class="form-label"></label>
+            <input asp-for="RG" required oninput="formatRG(this)" maxlength="12" class="form-control" />
+            <span asp-validation-for="RG" class="text-danger"></span>
+        </div>
+    </div>
+
+    <h3>Contatos</h3>
+    <div id="contatosContainer">
+        @for (int i = 0; i < Model.Contatos.Count; i++)
+        {
+            <div class="contato mb-3">
+                <label asp-for="Contatos[@i].Tipo" class="form-label">Tipo</label>
+                <select asp-for="Contatos[@i].Tipo" class="form-select">
+                    <option value="">Selecione o tipo</option>
+                    <option value="Residencial")>Residencial</option>
+                    <option value="Comercial")>Comercial</option>
+                    <option value="Celular">Celular</option>
+                </select>
+                <span asp-validation-for="Contatos[@i].Tipo" class="text-danger"></span>
+
+                <div class="mb-3 row">
+                    <div class="col-md-3">
+                        <label asp-for="Contatos[@i].DDD" class="form-label">DDD</label>
+                        <input asp-for="Contatos[@i].DDD" class="form-control" maxlength="2" />
+                    </div>
+                    <div class="col-md-9">
+                        <label asp-for="Contatos[@i].Telefone" class="form-label">Telefone</label>
+                        <input asp-for="Contatos[@i].Telefone" class="form-control" type="text" maxlength="10" />
+                        <small class="form-text text-muted">Formato: xxxx-xxxx</small>
+
+                    </div>
+
+                </div>
+                <button type="button" class="btn btn-danger removerContato">Remover Contato</button>
+
+            </div>
+        }
+    </div>
+    <button type="button" class="btn btn-secondary" id="adicionarContato">Adicionar Contato</button>
+
+    <h3>Endereços</h3>
+    <div id="enderecosContainer">
+        @for (int i = 0; i < Model.Enderecos.Count; i++)
+        {
+            <div class="endereco mb-3">
+                <div class="mb-3 row">
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Tipo" class="form-label">Tipo de Endereço</label>
+                        <select asp-for="Enderecos[@i].Tipo" class="form-select">
+                            <option value="">Selecione o tipo</option>
+                            <option value="Preferencial">Preferencial</option>
+                            <option value="Entrega">Entrega</option>
+                            <option value="Cobrança">Cobrança</option>
+                        </select>
+                        <span asp-validation-for="Enderecos[@i].Tipo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].CEP" class="form-label">*CEP</label>
+                        <input asp-for="Enderecos[@i].CEP" class="form-control" />
+                        <span asp-validation-for="Enderecos[@i].CEP" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Logradouro" class="form-label">Logradouro</label>
+                        <input asp-for="Enderecos[@i].Logradouro" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Numero" class="form-label">Número</label>
+                        <input asp-for="Enderecos[@i].Numero" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Bairro" class="form-label">Bairro</label>
+                        <input asp-for="Enderecos[@i].Bairro" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Cidade" class="form-label">Cidade</label>
+                        <input asp-for="Enderecos[@i].Cidade" class="form-control" />
+                        <span asp-validation-for="Enderecos[@i].Cidade" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Estado" class="form-label">Estado</label>
+                        <input asp-for="Enderecos[@i].Estado" class="form-control" />
+                        <span asp-validation-for="Enderecos[@i].Estado" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Complemento" class="form-label">Complemento</label>
+                        <input asp-for="Enderecos[@i].Complemento" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Enderecos[@i].Referencia" class="form-label">Referência</label>
+                        <input asp-for="Enderecos[@i].Referencia" class="form-control" />
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger removerEndereco">Remover Endereço</button>
+
+            </div>
+        }
+    </div>
+    <button type="button" class="btn btn-secondary" id="adicionarEndereco">Adicionar Endereço</button>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="d-flex mt-3">
+        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+        <a asp-controller="Cliente" asp-action="Listar" class="btn btn-secondary">Voltar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        function formatCPF(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+            input.value = value;
+        }
+
+        function formatRG(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 9) {
+                value = value.replace(/(\d{2})(\d{3})(\d{3})(\d)/, '$1.$2.$3-$4');
+            }
+            input.value = value;
+        }
+
+        // Adicionar novo contato
+        document.getElementById('adicionarContato').addEventListener('click', function () {
+            let contatosContainer = document.getElementById('contatosContainer');
+            let newIndex = contatosContainer.children.length;
+
+            let newContato = `
+                <div class="contato mb-3">
+                    <label class="form-label">Tipo</label>
+                    <select name="Contatos[${newIndex}].Tipo" class="form-select">
+                        <option value="">Selecione o tipo</option>
+                        <option value="Residencial">Residencial</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Celular">Celular</option>
+                    </select>
+
+                    <div class="mb-3 row">
+                        <div class="col-md-3">
+                            <label class="form-label">DDD</label>
+                            <input name="Contatos[${newIndex}].DDD" class="form-control" maxlength="2" />
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-label">Telefone</label>
+                            <input name="Contatos[${newIndex}].Telefone" class="form-control" type="text" maxlength="10" />
+                        </div>
+                    </div>
+                </div>`;
+            contatosContainer.insertAdjacentHTML('beforeend', newContato);
+        });
+
+        // Adicionar novo endereço
+        document.getElementById('adicionarEndereco').addEventListener('click', function () {
+            let enderecosContainer = document.getElementById('enderecosContainer');
+            let newIndex = enderecosContainer.children.length;
+
+            let newEndereco = `
+                <div class="endereco mb-3">
+                    <div class="mb-3 row">
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Endereço</label>
+                            <select name="Enderecos[${newIndex}].Tipo" class="form-select">
+                                <option value="">Selecione o tipo</option>
+                                <option value="Preferencial">Preferencial</option>
+                                <option value="Entrega">Entrega</option>
+                                <option value="Cobrança">Cobrança</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">*CEP</label>
+                            <input name="Enderecos[${newIndex}].CEP" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Logradouro</label>
+                            <input name="Enderecos[${newIndex}].Logradouro" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="col-md-4">
+                            <label class="form-label">Número</label>
+                            <input name="Enderecos[${newIndex}].Numero" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Bairro</label>
+                            <input name="Enderecos[${newIndex}].Bairro" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Cidade</label>
+                            <input name="Enderecos[${newIndex}].Cidade" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="col-md-4">
+                            <label class="form-label">Estado</label>
+                            <input name="Enderecos[${newIndex}].Estado" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Complemento</label>
+                            <input name="Enderecos[${newIndex}].Complemento" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Referência</label>
+                            <input name="Enderecos[${newIndex}].Referencia" class="form-control" />
+                        </div>
+                    </div>
+                </div>`;
+            enderecosContainer.insertAdjacentHTML('beforeend', newEndereco);
+        });
+
+        // Remover endereço
+        document.getElementById('enderecosContainer').addEventListener('click', function (event) {
+            if (event.target.classList.contains('removerEndereco')) {
+                event.target.closest('.endereco').remove();
+            }
+        });
+
+        // Remover contato
+        document.getElementById('contatosContainer').addEventListener('click', function (event) {
+            if (event.target.classList.contains('removerContato')) {
+                event.target.closest('.contato').remove();
+            }
+        });
+
+
+    </script>
+}

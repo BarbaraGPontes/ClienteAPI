@@ -1,0 +1,143 @@
+﻿@model ClienteAPI.Models.Cliente
+
+<h1>Criar Cliente</h1>
+
+<form asp-action="Criar" method="post">
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input asp-for="Nome" required class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">* E-mail</label>
+        <input asp-for="Email" required class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <div class="col">
+            <label asp-for="CPF" class="form-label">* CPF</label>
+            <input asp-for="CPF" required oninput="formatCPF(this)" maxlength="14" class="form-control" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="RG" class="form-label">* RG</label>
+            <input asp-for="RG" required oninput="formatRG(this)" maxlength="12" class="form-control" />
+            <span asp-validation-for="RG" class="text-danger"></span>
+        </div>
+    </div>
+
+    <h3>Contatos</h3>
+    <div id="contatosContainer">
+        <div class="mb-3">
+            <label asp-for="Contatos[0].Tipo" class="form-label">Tipo</label>
+            <select asp-for="Contatos[0].Tipo" class="form-select">
+                <option value="">Selecione o tipo</option>
+                <option value="Residencial">Residencial</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Celular">Celular</option>
+            </select>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-md-3">
+                <label asp-for="Contatos[0].DDD" class="form-label">DDD</label>
+                <input asp-for="Contatos[0].DDD" class="form-control" maxlength="2" />
+            </div>
+            <div class="col-md-9">
+                <label asp-for="Contatos[0].Telefone" class="form-label">Telefone</label>
+                <input asp-for="Contatos[0].Telefone" class="form-control" maxlength="10" type="text" />
+                <small class="form-text text-muted">Formato: xxxx-xxxx</small>
+
+            </div>
+        </div>
+    </div>
+
+  <h3>Endereços</h3>
+<div id="enderecosContainer">
+    <div class="mb-3 row">
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Tipo" class="form-label">Tipo de Endereço</label>
+            <select asp-for="Enderecos[0].Tipo" class="form-select">
+                <option value="">Selecione o tipo</option>
+                <option value="Preferencial">Preferencial</option>
+                <option value="Entrega">Entrega</option>
+                <option value="Cobrança">Cobrança</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].CEP" class="form-label">*CEP</label>
+            <input asp-for="Enderecos[0].CEP" class="form-control" />
+            <span asp-validation-for="Enderecos[0].CEP" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Logradouro" class="form-label">Logradouro</label>
+            <input asp-for="Enderecos[0].Logradouro" class="form-control" />
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Numero" class="form-label">Número</label>
+            <input asp-for="Enderecos[0].Numero" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Bairro" class="form-label">Bairro</label>
+            <input asp-for="Enderecos[0].Bairro" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Cidade" class="form-label">Cidade</label>
+            <input asp-for="Enderecos[0].Cidade" class="form-control" />
+            <span asp-validation-for="Enderecos[0].Cidade" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Estado" class="form-label">Estado</label>
+            <input asp-for="Enderecos[0].Estado" class="form-control" />
+            <span asp-validation-for="Enderecos[0].Estado" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Complemento" class="form-label">Complemento</label>
+            <input asp-for="Enderecos[0].Complemento" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Enderecos[0].Referencia" class="form-label">Referência</label>
+            <input asp-for="Enderecos[0].Referencia" class="form-control" />
+        </div>
+    </div>
+</div>
+
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="d-flex mt-3">
+        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+        <a asp-controller="Cliente" asp-action="Listar" class="btn btn-secondary">Voltar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        function formatCPF(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+            input.value = value;
+        }
+
+        function formatRG(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 9) {
+                value = value.replace(/(\d{2})(\d{3})(\d{3})(\d)/, '$1.$2.$3-$4');
+            }
+            input.value = value;
+        }
+    </script>
+}

@@ -1,0 +1,159 @@
+[
+  {
+    "Id": 1,
+    "Nome": "Lucas Pereira",
+    "Email": "lucas.pereira@example.com",
+    "CPF": "654.321.987-00",
+    "RG": "65.432.198-6",
+    "Contatos": [
+      {
+        "Id": 1,
+        "Tipo": "Residencial",
+        "DDD": 22,
+        "Telefone": "3452-7654"
+      }
+    ],
+    "Enderecos": [
+      {
+        "Id": 1,
+        "Tipo": "Entrega",
+        "CEP": "45678-900",
+        "Logradouro": "Rua dos Jacarandás",
+        "Numero": 234,
+        "Bairro": "Vila Nova",
+        "Complemento": null,
+        "Cidade": "Curitiba",
+        "Estado": "PR",
+        "Referencia": "Atrás da escola"
+      },
+      {
+        "Id": 2,
+        "Tipo": "Cobrança",
+        "CEP": "05550-100",
+        "Logradouro": "EMILIA PILON",
+        "Numero": 47,
+        "Bairro": "JARDIM DO LAGO",
+        "Complemento": "COND ONIX BL 2 AP 84",
+        "Cidade": "São Paulo",
+        "Estado": "SP",
+        "Referencia": null
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Nome": "BGC",
+    "Email": "gimemesb@gmail.com",
+    "CPF": "123.456.789-11",
+    "RG": "98.765.432-2",
+    "Contatos": [
+      {
+        "Id": 2,
+        "Tipo": "Residencial",
+        "DDD": null,
+        "Telefone": null
+      }
+    ],
+    "Enderecos": [
+      {
+        "Id": 3,
+        "Tipo": "Entrega",
+        "CEP": "06419-240",
+        "Logradouro": "EMILIA PILON",
+        "Numero": 0,
+        "Bairro": "JARDIM DO LAGO",
+        "Complemento": null,
+        "Cidade": "Barueri",
+        "Estado": "SP",
+        "Referencia": null
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Nome": "Ana Souza",
+    "Email": "ana.souza@example.com",
+    "CPF": "321.654.987-00",
+    "RG": "32.165.498-5",
+    "Contatos": [
+      {
+        "Id": 3,
+        "Tipo": "Celular",
+        "DDD": 11,
+        "Telefone": "98765-4321"
+      }
+    ],
+    "Enderecos": [
+      {
+        "Id": 4,
+        "Tipo": "Preferencial",
+        "CEP": "11223-445",
+        "Logradouro": "Av. Paulista",
+        "Numero": 1500,
+        "Bairro": "Bela Vista",
+        "Complemento": "Apto 1001",
+        "Cidade": "São Paulo",
+        "Estado": "SP",
+        "Referencia": "Próximo ao MASP"
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Nome": "Carlos Silva",
+    "Email": "carlos.silva@example.com",
+    "CPF": "987.654.321-00",
+    "RG": "98.765.432-1",
+    "Contatos": [
+      {
+        "Id": 4,
+        "Tipo": "Comercial",
+        "DDD": 21,
+        "Telefone": "2233-4455"
+      }
+    ],
+    "Enderecos": [
+      {
+        "Id": 5,
+        "Tipo": "Cobrança",
+        "CEP": "12345-678",
+        "Logradouro": "Rua das Flores",
+        "Numero": 100,
+        "Bairro": "Centro",
+        "Complemento": "Sala 201",
+        "Cidade": "Rio de Janeiro",
+        "Estado": "RJ",
+        "Referencia": "Próximo ao metrô"
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "Nome": "Mariana Oliveira",
+    "Email": "mariana.oliveira@example.com",
+    "CPF": "123.456.789-99",
+    "RG": "12.345.678-9",
+    "Contatos": [
+      {
+        "Id": 5,
+        "Tipo": "Residencial",
+        "DDD": 19,
+        "Telefone": "3344-5566"
+      }
+    ],
+    "Enderecos": [
+      {
+        "Id": 6,
+        "Tipo": "Preferencial",
+        "CEP": "54321-098",
+        "Logradouro": "Av. Brasil",
+        "Numero": 500,
+        "Bairro": "Jardim América",
+        "Complemento": "Casa",
+        "Cidade": "Campinas",
+        "Estado": "SP",
+        "Referencia": "Próximo ao Shopping Iguatemi"
+      }
+    ]
+  }
+]
